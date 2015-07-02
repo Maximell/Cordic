@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 
 int main(int argc, char* argv[]) {
 
@@ -26,6 +27,18 @@ int main(int argc, char* argv[]) {
 	}
 
 	printf("The program was called with the following parameters:\nX-Value: %d\nY-Value: %d\nAngle: %d\nVectoring Mode: %d\nRotation Mode: %d\n", x_value, y_value, angle, Vectoring, Rotation); 
-			
+
+
+	if (Rotation == 1) {
+		double x_new, y_new;
+
+		x_new = (double)x_value*cos(angle*3.14/180) + (double)y_value*sin(angle*3.14/180);
+		y_new = (double)y_value*cos(angle*3.14/180) - (double)x_value*sin(angle*3.14/180);
+
+		printf("The final rotated point is: [%f,%f]\n", x_new, y_new);
+		return 0;
+	}
+
+
 	return 0;
 }
