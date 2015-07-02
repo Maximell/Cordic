@@ -5,40 +5,46 @@
 
 int main(int argc, char* argv[]) {
 
-	if (argc != 5) {
-		printf("Incorrect use. Proper use is: ./Cordic Rotation/Vectoring x,y angle.\n");
+	if (argc != 4 && argc != 3) {
+		printf("Incorrect use. Proper use is: \n./Cordic Rotation x y angle\n./Cordic Vectoring x y\n");
 		return 0;
 	}	
-	
-	int x_value = atoi(argv[2]);
-	int y_value = atoi(argv[3]);
-	int angle = atoi(argv[4]);
+
+	int x_value = atoi(argv[1]);
+	int y_value = atoi(argv[2]);
 	int Vectoring = 0;
 	int Rotation = 0;
+	int angle = 0;
 
-	if (strcmp("Vectoring", argv[1]) == 0) {
-		Vectoring = 1;
-	} else if(strcmp("Rotation", argv[1]) == 0) {
+	if (argc == 4) {
 		Rotation = 1;
+		angle = atoi(argv[3]);
+		printf("The program was called in Rotational mode with the following parameters:\nX-Value: %d\nY-Value: %d\nAngle: %d\n", x_value, y_value, angle);
 	}
-
-	if (Vectoring == 0 && Rotation == 0){
-		printf("Need to select either Vectoring or Rotational Mode.\n");
+	if (argc == 3) {
+		Vectoring = 1;
+		printf("The program was called in Vectoring mode with the following parameters:\nX-Value: %d\nY-Value: %d\n", x_value, y_value);
 	}
-
-	printf("The program was called with the following parameters:\nX-Value: %d\nY-Value: %d\nAngle: %d\nVectoring Mode: %d\nRotation Mode: %d\n", x_value, y_value, angle, Vectoring, Rotation); 
-
 
 	if (Rotation == 1) {
 		double x_new, y_new;
 
-		x_new = (double)x_value*cos(angle*3.14/180) + (double)y_value*sin(angle*3.14/180);
-		y_new = (double)y_value*cos(angle*3.14/180) - (double)x_value*sin(angle*3.14/180);
+		x_new = (double)x_value*cos(angle*M_PI/180) + (double)y_value*sin(angle*M_PI/180);
+		y_new = (double)y_value*cos(angle*M_PI/180) - (double)x_value*sin(angle*M_PI/180);
 
 		printf("The final rotated point is: [%f,%f]\n", x_new, y_new);
 		return 0;
 	}
 
+	if (Vectoring == 1) {
+		double new_angle, length;
+
+		length = sqrt(x_value*x_value + y_value*y_value);
+		new_angle = atan((double)y_value/(double)x_value)*180/M_PI;
+
+		printf("The vector was %f long, and needed ot be rotated %f degrees.\n", length, new_angle);
+		return 0;
+	}
 
 	return 0;
 }
