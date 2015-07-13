@@ -6,7 +6,7 @@
 int main(int argc, char* argv[]) {
 
 	if (argc != 4 && argc != 3) {
-		printf("Incorrect use. Proper use is: \n./Cordic Rotation x y angle\n./Cordic Vectoring x y\n");
+		printf("Incorrect use. Proper use is: \nFor Rotation mode: ./Cordic x y angle\nFor Vectoring mode: ./Cordic x y\n");
 		return 0;
 	}	
 

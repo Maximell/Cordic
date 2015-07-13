@@ -1,6 +1,6 @@
 main:
-	gcc -o Cordic cordic_float.c -lm
+	gcc -o Cordic_Float cordic_float.c -lm
 
 clean:
 	rm *.o
-	rm Cordic
+	rm Cordic_Float
