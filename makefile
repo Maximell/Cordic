@@ -1,5 +1,5 @@
 main:
-	gcc -o Cordic Cordic.c
+	gcc -o Cordic Cordic.c -lm
 
 clean:
 	rm *.o
