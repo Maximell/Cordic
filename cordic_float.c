@@ -3,48 +3,47 @@
 #include <stdlib.h>
 #include <math.h>
 
+#define NUM_ELEMENTS 14
+
+void iterationComputations(float* x_value, float* y_value, float* angle, float theta, float shift) {
+	
+	// Determine whether to add or subtract
+	int mew = *angle >= 0.0 ? 1.0 : -1.0;
+
+	// Compute
+	float temp = *x_value;
+
+	*x_value = *x_value - ((mew) * (*y_value) * (shift));
+	*y_value = *y_value + ((mew) * (temp) * (shift));
+	*angle = *angle - ((mew) * (theta));
+}
+
 int main(int argc, char* argv[]) {
 
 	if (argc != 4 && argc != 3) {
-		printf("Incorrect use. Proper use is: \nFor Rotation mode: ./Cordic x y angle\nFor Vectoring mode: ./Cordic x y\n");
+		printf("Incorrect use. Proper use is: \n./Cordic 'X-value' 'Y-value' 'angle (degrees)'\n");
 		return 0;
 	}	
 
-	int x_value = atoi(argv[1]);
-	int y_value = atoi(argv[2]);
-	int Vectoring = 0;
-	int Rotation = 0;
-	int angle = 0;
+	float x_value = atoi(argv[1]);
+	float y_value = atoi(argv[2]);
+	float angle = atoi(argv[3]);
 
-	if (argc == 4) {
-		Rotation = 1;
-		angle = atoi(argv[3]);
-		printf("The program was called in Rotational mode with the following parameters:\nX-Value: %d\nY-Value: %d\nAngle: %d\n", x_value, y_value, angle);
-	}
-	if (argc == 3) {
-		Vectoring = 1;
-		printf("The program was called in Vectoring mode with the following parameters:\nX-Value: %d\nY-Value: %d\n", x_value, y_value);
-	}
+	printf("Cordic was called with the following values:\nX-Value: %f\nY-value: %f\nAngle: %f\n\n", x_value, y_value, angle);
 
-	if (Rotation == 1) {
-		double x_new, y_new;
+	// Lookup tables
+	float circularLookup[NUM_ELEMENTS] = {45, 26.56505, 14.03624, 7.12502, 3.57633, 1.78991, 0.89517, 0.44761, 0.22381, 0.11191, 0.055953, 0.027976, 0.0139882, 0.00699411};
+	float powLookup[NUM_ELEMENTS] = {1, 0.5, 0.25, 0.125, 0.0625, 0.03125, 0.015625, 0.0078125, 0.003090625, 0.001953125, 0.0009765625, 0.00048828125, 0.00024414062, 0.00012207031};
 
-		x_new = (double)x_value*cos(angle*M_PI/180) + (double)y_value*sin(angle*M_PI/180);
-		y_new = (double)y_value*cos(angle*M_PI/180) - (double)x_value*sin(angle*M_PI/180);
-
-		printf("The final rotated point is: [%f,%f]\n", x_new, y_new);
-		return 0;
+	// Main loop - determines precision
+	for (int i=0; i<NUM_ELEMENTS; i++) {
+		iterationComputations(&x_value, &y_value, &angle, circularLookup[i], powLookup[i]);
 	}
 
-	if (Vectoring == 1) {
-		double new_angle, length;
+	x_value = x_value*0.607252;
+	y_value = y_value*0.607252;
 
-		length = sqrt(x_value*x_value + y_value*y_value);
-		new_angle = atan((double)y_value/(double)x_value)*180/M_PI;
-
-		printf("The vector was %f long, and needed ot be rotated %f degrees.\n", length, new_angle);
-		return 0;
-	}
+	printf("Final X-Value: %f\nFinal Y-Value: %f\nFinal Angle: %f\n", x_value, y_value, angle);
 
 	return 0;
 }
