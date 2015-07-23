@@ -12,6 +12,8 @@
 #include "cordic_implementations/int_cordic_local.c"
 // cordic implemented with memory disambiguation as well as local variables
 #include "cordic_implementations/int_cordic_disambig_local.c"
+// cordic implemented with hard-coded values
+#include "cordic_implementations/int_hardcoded.c"
 
 void comparison(char* optimization, int x, int y, int opt_x, int opt_y) {
 	if (x!=opt_x || y!=opt_y) {
@@ -64,8 +66,12 @@ int main(void) {
 	int_cordic_disambig_local(&x, &y, &angle, LOOKUP2);
 	check("int_cordic_disambig_local", x_basic, y_basic, x, y);	
 
-	// hardcoded
-	//
+	// cordic implemented with hardcoded values
+	x = x_rand; y = y_rand; angle = angle_rand;
+	int_hardcoded(&x, &y, &angle, LOOKUP2);
+	check("int_hardcoded", x_basic, y_basic, x, y);	
+
+
 	// memory alias disambiguation
 	//	more eff. calc of sign
 	//
