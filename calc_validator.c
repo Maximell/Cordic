@@ -14,6 +14,8 @@
 #include "cordic_implementations/int_cordic_disambig_local.c"
 // cordic implemented with hard-coded values
 #include "cordic_implementations/int_hardcoded.c"
+// cordic implemented with pipelining optimizations
+#include "cordic_implementations/int_cordic_pipeline.c"
 
 void comparison(char* optimization, int x, int y, int opt_x, int opt_y) {
 	if (x!=opt_x || y!=opt_y) {
@@ -70,6 +72,11 @@ int main(void) {
 	x = x_rand; y = y_rand; angle = angle_rand;
 	int_hardcoded(&x, &y, &angle, LOOKUP2);
 	check("int_hardcoded", x_basic, y_basic, x, y);	
+
+	// cordic implemented with pipelining optimizations
+	x = x_rand; y = y_rand; angle = angle_rand;
+	int_cordic_pipeline(&x, &y, &angle, LOOKUP2);
+	check("int_cordic_pipeline", x_basic, y_basic, x, y);	
 
 
 	// memory alias disambiguation
