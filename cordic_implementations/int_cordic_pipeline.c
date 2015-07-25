@@ -25,4 +25,7 @@ extern inline void int_cordic_pipeline(int* restrict x, int* restrict y, int* re
 		lookup_value = lookup[i];
 		x_local = x_next; y_local = y_next; z_local = z_next;
 	}
+
+	*x = x_local;
+	*y = y_local;
 }
