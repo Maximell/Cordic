@@ -20,6 +20,8 @@
 #include "cordic_implementations/int_cordic_pipeline.c"
 // cordic implemented with one round of loop unrolling
 #include "cordic_implementations/int_cordic_loop_unroll.c"
+// cordic implemented with seven rounds of loop unrolling
+#include "cordic_implementations/int_cordic_loop_unroll_7.c"
 
 void comparison(char* optimization, int x, int y, int opt_x, int opt_y) {
 	printf("\n");
@@ -92,7 +94,13 @@ int main(void) {
 	// cordic implemented with one round of loop unrolling
 	x = x_rand; y = y_rand; angle = angle_rand;
 	int_cordic_loop_unroll(&x, &y, &angle, LOOKUP2);
-	comparison("int_cordic_loop_unroll", x_basic, y_basic, x, y);	
+	comparison("int_cordic_loop_unroll", x_basic, y_basic, x, y);
+
+	// cordic implemented with six rounds of loop unrolling
+	x = x_rand; y = y_rand; angle = angle_rand;
+	int_cordic_loop_unroll_7(&x, &y, &angle, LOOKUP2);
+	comparison("int_cordic_loop_unroll_7", x_basic, y_basic, x, y);
+
 	// memory alias disambiguation
 	//	more eff. calc of sign
 	//
