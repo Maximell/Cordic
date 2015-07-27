@@ -1,5 +1,5 @@
 extern inline void int_cordic_disambig_local(int* restrict x, int* restrict y, int* restrict z, const int* restrict lookup) {
-	
+
 	int sign, temp;
 
 	int local_x = *x;

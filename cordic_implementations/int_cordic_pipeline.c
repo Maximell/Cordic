@@ -10,7 +10,7 @@ extern inline void int_cordic_pipeline(int* restrict x, int* restrict y, int* re
 
 
 	lookup_value = lookup[0];
-	for (int i=0; i < PRECISION; i++) {
+	for (int i=0; i < PRECISION;) {
 	
 		if (z_local & 0x80000000) {
 			x_next = x_local + (y_local >> i);
