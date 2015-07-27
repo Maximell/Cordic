@@ -1,4 +1,4 @@
-extern inline void int_cordic(int *x, int *y, int *z, const int *lookup) {
+extern inline void int_cordic_simp_flow(int *x, int *y, int *z, const int *lookup) {
 	
 	int temp;
 
