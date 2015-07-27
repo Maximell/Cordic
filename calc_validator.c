@@ -65,7 +65,7 @@ int main(void) {
 	comparison("int_cordic_simp_flow", x_basic, y_basic, x, y);
 
 	// cordic implemented with memory alias disambiguation
-	int x = x_rand; int y = y_rand; int angle = angle_rand;
+	x = x_rand; y = y_rand; angle = angle_rand;
 	int_cordic_disambig(&x, &y, &angle, LOOKUP2);
 	comparison("int_cordic_disambig", x_basic, y_basic, x, y);
 
