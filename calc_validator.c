@@ -101,15 +101,7 @@ int main(void) {
 	int_cordic_loop_unroll_7(&x, &y, &angle, LOOKUP2);
 	comparison("int_cordic_loop_unroll_7", x_basic, y_basic, x, y);
 
-	// memory alias disambiguation
-	//	more eff. calc of sign
-	//
-	// pipeline
-	// 	more eff calc of sign + lookup
-	//
-	// unroll
-	// 	can be done a varying number of times
-	//
+
 	// assembly optimizations
 
 	return 0;
