@@ -1,7 +1,10 @@
-all: calc_validator
+all: calc_validator profiler
 
 calc_validator:
-	gcc -Wall -srd=c99 -o build/calc_validator calc_validator.c
+	gcc -Wall -std=c99 -o build/calc_validator calc_validator.c
+
+profiler:
+	gcc -Wall -std=c99 -o build/profiler profiler.c
 
 cordic_float:
 	gcc -o Cordic_Float cordic_float.c -lm
