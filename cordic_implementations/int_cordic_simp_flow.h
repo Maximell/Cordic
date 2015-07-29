@@ -1,0 +1,1 @@
+void int_cordic_simp_flow(int* restrict x, int* restrict y, const int* restrict z, const int * restrict lookup);
