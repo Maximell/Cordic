@@ -1,21 +1,17 @@
-extern inline void cordic_assembly(int *x, int *y, int *z, cordic_mode mode) {
+extern inline void cordic_assembly_rotational(int *x, int *y, int *z, int* [] elem_angle) {
 	
 	int* val;
 	int x_temp;
 
-	if (mode == ROTATIONAL) {
-		val = z;
-	} else {
-		val = y;
-	}
+	val = z;
 
-	*x = *x << SHIFT;
-	*y = *y << SHIFT;
-	*z = *z << SHIFT;
+	*x = *x << 16;
+	*y = *y << 16;
+	*z = *z << 16;
 
-	for (int i = 0; i < PRECISION; i++) {
+	for (int i = 0; i < 14; i++) {
 		x_temp = *x;
-		if (sign_decision(mode, *val)) {
+		if (val < 0) {
 			*x = *x + (*y >> i);
 			*y = *y - (x_temp >> i);
 			*z = *z + elem_angle[i];
