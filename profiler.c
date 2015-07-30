@@ -75,7 +75,7 @@ int main(void) {
 		x = values[i];
 		y = angles[repetitions-1-i];
 		z = angles[i];
-		cordic_assembly(&x, &y, &z, elem_angle);
+		cordic_assembly(&x, &y, &z, (int)ROTATIONAL);
 	}
 	printf("\tarm cordic\ntime: %f\n\n", (double)(get_time() - before_time) / ticks_per_second);
 
