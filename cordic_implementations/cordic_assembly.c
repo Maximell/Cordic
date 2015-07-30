@@ -1,4 +1,4 @@
-extern inline void cordic_assembly(int *x, int *y, int *z, int elem_angle[14]) {
+extern inline void cordic_assembly(int *x, int *y, int *z, const int elem_angle[14]) {
 	
 	int* val;
 	int x_temp;
