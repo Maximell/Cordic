@@ -8,7 +8,7 @@
 	.eabi_attribute 26, 2
 	.eabi_attribute 30, 6
 	.eabi_attribute 18, 4
-	.file	"cordic_assembly.c"
+	.file	"cordic_assembly_optimized.c"
 	.section	.rodata
 	.align	2
 	.type	local_elem_angle.1122, %object
@@ -30,9 +30,9 @@ local_elem_angle.1122:
 	.word	458
 	.text
 	.align	2
-	.global	cordic_assembly
-	.type	cordic_assembly, %function
-cordic_assembly:
+	.global	cordic_assembly_optimized
+	.type	cordic_assembly_optimized, %function
+cordic_assembly_optimized:
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 40
 	@ frame_needed = 1, uses_anonymous_args = 0
@@ -156,6 +156,6 @@ cordic_assembly:
 	.align	2
 .L11:
 	.word	local_elem_angle.1122
-	.size	cordic_assembly, .-cordic_assembly
+	.size	cordic_assembly_optimized, .-cordic_assembly_optimized
 	.ident	"GCC: (Sourcery G++ Lite 2008q3-72) 4.3.2"
 	.section	.note.GNU-stack,"",%progbits
