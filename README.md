@@ -16,3 +16,11 @@ Versions of the code to be implemented and tested
 To create assembly from generate_assembly.c:
 	arm-linux-gcc -Wall -std=c99 -S -c generate_assembly.c
 	
+mul 5
+add 1
+shift 1
+div 15
+mem 5
+jump 1
+
++replace x,y,x with assembly inlining 

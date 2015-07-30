@@ -37,6 +37,7 @@ int main(void) {
 
 	printf("cos cordic: %15lf\n\n", cos_cordic(30));
 	printf("sin cordic: %15lf\n\n", sin_cordic(45));
+	printf("arctan xy cordic: %15lf\n\n", arctan_x_y_cordic(3,4));
 	//printf("arctan cordic: %15lf\n\n", arctan_cordic(2));
 
 	int x = 1;
@@ -56,32 +57,6 @@ int main(void) {
 	z = 45;
 	cordic_optimized(&x, &y, &z, ROTATIONAL);
 	printf("optimized cordic: %d, %d, %d\n", x, y, z);
-
-/*
-	int x_test = 500;
-	int y_test = 200;
-	int z_test = 45;
-	int_cordic(&x_test, &y_test, &z_test, LOOKUP2);
-	printf("x: %d, y: %d\n\n", x_test, y_test);
-
-
-	int x_rand = rand() % 10000;
-	int y_rand = rand() % 10000;
-	int angle_rand = rand() % HALFPI2;
-
-	printf("x_rand: %d, y_rand: %d, angle_rand: %d\n", x_rand, y_rand, angle_rand);
-
-	int x_basic = x_rand;
-	int y_basic = y_rand;
-	int angle_basic = angle_rand;
-
-	// cordic implemented with integers - these values are assumed to be correct. 
-	int_cordic(&x_basic, &y_basic, &angle_basic, LOOKUP2);
-
-
-	// assembly optimizations
-
-*/
 
 	return 0;
 }

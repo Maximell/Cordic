@@ -147,3 +147,14 @@ extern inline double sin_cordic(int angle) {
 
 	return fixed_to_float((double)y) / SCALE_CONSTANT;
 }
+
+double arctan_x_y_cordic(int x, int y) {
+
+	int x_local = x;
+	int y_local = y;
+	int z_local = 0;
+
+	cordic(&x_local, &y_local, &z_local, VECTORING);
+
+	return 90 - fixed_to_float(z_local);
+}
