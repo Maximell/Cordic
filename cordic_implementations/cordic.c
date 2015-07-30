@@ -55,7 +55,6 @@ extern inline void cordic(int* x, int* y, int* z, cordic_mode mode) {
 extern inline void cordic_optimized(int* restrict x, int* restrict y, int* restrict z, cordic_mode mode) {
 
 	int *val;
-	int x_temp;
 
 	const int local_elem_angle[] = {
 		2949120,
@@ -91,17 +90,36 @@ extern inline void cordic_optimized(int* restrict x, int* restrict y, int* restr
 	y_local = y_local << SHIFT;
 	z_local = z_local << SHIFT;
 
-	for (int i = 0; i < PRECISION; i++) {
-		x_temp = x_local;
+	int x_next, y_next, z_next;
+
+	int i=0;
+	int j=1;
+
+	for (; i < PRECISION; i+=2, j+=2) {
+		
 		if ((*val < 0 && mode == ROTATIONAL) || (*val >= 0 && mode != ROTATIONAL)) {
-			x_local = x_local + (y_local >> i);
-			y_local = y_local - (x_temp >> i);
-			z_local = z_local + local_elem_angle[i];
+			x_next = x_local + (y_local >> i);
+			y_next = y_local - (x_local >> i);
+			z_next = z_local + local_elem_angle[i];
 		} else {
-			x_local = x_local - (y_local >> i);
-			y_local = y_local + (x_temp >> i);
-			z_local = z_local - local_elem_angle[i];
+			x_next = x_local - (y_local >> i);
+			y_next = y_local + (x_local >> i);
+			z_next = z_local - local_elem_angle[i];
 		}
+
+		x_local = x_next; y_local = y_next; z_local = z_next;
+
+		if ((*val < 0 && mode == ROTATIONAL) || (*val >= 0 && mode != ROTATIONAL)) {
+			x_next = x_local + (y_local >> j);
+			y_next = y_local - (x_local >> j);
+			z_next = z_local + local_elem_angle[j];
+		} else {
+			x_next = x_local - (y_local >> j);
+			y_next = y_local + (x_local >> j);
+			z_next = z_local - local_elem_angle[j];
+		}
+		x_local = x_next; y_local = y_next; z_local = z_next;
+
 	}
 	*x = x_local;
 	*y = y_local;
