@@ -1,4 +1,4 @@
-extern inline void cordic_assembly_rotational(int *x, int *y, int *z, int* [] elem_angle) {
+extern inline void cordic_assembly_rotational(int *x, int *y, int *z, int* elem_angle) {
 	
 	int* val;
 	int x_temp;
