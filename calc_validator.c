@@ -4,24 +4,12 @@
 
 #include "define.h"
 
-// cordic implemented with integers
-#include "cordic_implementations/int_cordic.c"
-// cordic implemented with a simplified sign check
-#include "cordic_implementations/int_cordic_simp_flow.c"
-// cordic implemented with memory disambiguation
-#include "cordic_implementations/int_cordic_disambig.c"
-// cordic implemented with local variables
-#include "cordic_implementations/int_cordic_local.c"
-// cordic implemented with memory disambiguation as well as local variables
-#include "cordic_implementations/int_cordic_disambig_local.c"
-// cordic implemented with hard-coded values
-#include "cordic_implementations/int_hardcoded.c"
-// cordic implemented with pipelining optimizations
-#include "cordic_implementations/int_cordic_pipeline.c"
-// cordic implemented with one round of loop unrolling
-#include "cordic_implementations/int_cordic_loop_unroll.c"
-// cordic implemented with seven rounds of loop unrolling
-#include "cordic_implementations/int_cordic_loop_unroll_7.c"
+// cordic implemted with fixed point arithmatic
+#include "cordic_implementations/cordic.c"
+
+// arm
+#include "cordic_implementations/cordic_assembly.h"
+
 
 void comparison(char* optimization, int x, int y, int opt_x, int opt_y) {
 	printf("\n");
@@ -48,6 +36,32 @@ int main(void) {
 		return 1;
 	}
 
+	printf("cos cordic: %15lf\n\n", cos_cordic(30));
+	printf("sin cordic: %15lf\n\n", sin_cordic(45));
+	//printf("arctan cordic: %15lf\n\n", arctan_cordic(2));
+
+	int x = 1;
+	int y = 0;
+	int z = 45;
+	cordic(&x, &y, &z, ROTATIONAL);
+	printf("normal cordic: %d, %d, %d\n", x, y, z);
+
+	x = 1;
+	y = 0;
+	z = 45;
+	cordic_assembly(&x, &y, &z, elem_angle);
+	printf("assembly cordic: %d, %d, %d\n", x, y, z);
+
+
+
+/*
+	int x_test = 500;
+	int y_test = 200;
+	int z_test = 45;
+	int_cordic(&x_test, &y_test, &z_test, LOOKUP2);
+	printf("x: %d, y: %d\n\n", x_test, y_test);
+
+
 	int x_rand = rand() % 10000;
 	int y_rand = rand() % 10000;
 	int angle_rand = rand() % HALFPI2;
@@ -61,48 +75,10 @@ int main(void) {
 	// cordic implemented with integers - these values are assumed to be correct. 
 	int_cordic(&x_basic, &y_basic, &angle_basic, LOOKUP2);
 
-	// cordic implemented with simplified sign checking
-	int x = x_rand; int y = y_rand; int angle = angle_rand;
-	int_cordic_simp_flow(&x, &y, &angle, LOOKUP2);
-	comparison("int_cordic_simp_flow", x_basic, y_basic, x, y);
-
-	// cordic implemented with memory alias disambiguation
-	x = x_rand; y = y_rand; angle = angle_rand;
-	int_cordic_disambig(&x, &y, &angle, LOOKUP2);
-	comparison("int_cordic_disambig", x_basic, y_basic, x, y);
-
-	// cordic implemented with local variables
-	x = x_rand; y = y_rand; angle = angle_rand;
-	int_cordic_local(&x, &y, &angle, LOOKUP2);
-	comparison("int_cordic_local", x_basic, y_basic, x, y);
-
-	// cordic implemented with local variables and memory alias disambiguation
-	x = x_rand; y = y_rand; angle = angle_rand;
-	int_cordic_disambig_local(&x, &y, &angle, LOOKUP2);
-	comparison("int_cordic_disambig_local", x_basic, y_basic, x, y);	
-
-	// cordic implemented with hardcoded values
-	x = x_rand; y = y_rand; angle = angle_rand;
-	int_hardcoded(&x, &y, &angle, LOOKUP2);
-	comparison("int_hardcoded", x_basic, y_basic, x, y);	
-
-	// cordic implemented with pipelining optimizations
-	x = x_rand; y = y_rand; angle = angle_rand;
-	int_cordic_pipeline(&x, &y, &angle, LOOKUP2);
-	comparison("int_cordic_pipeline", x_basic, y_basic, x, y);	
-
-	// cordic implemented with one round of loop unrolling
-	x = x_rand; y = y_rand; angle = angle_rand;
-	int_cordic_loop_unroll(&x, &y, &angle, LOOKUP2);
-	comparison("int_cordic_loop_unroll", x_basic, y_basic, x, y);
-
-	// cordic implemented with six rounds of loop unrolling
-	x = x_rand; y = y_rand; angle = angle_rand;
-	int_cordic_loop_unroll_7(&x, &y, &angle, LOOKUP2);
-	comparison("int_cordic_loop_unroll_7", x_basic, y_basic, x, y);
-
 
 	// assembly optimizations
+
+*/
 
 	return 0;
 }

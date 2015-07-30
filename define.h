@@ -1,14 +1,33 @@
 #define PRECISION 14
+#define SHIFT 16
+#define FLOAT_SHIFT 65536.0
+#define BASE_SHIFT 65536
+#define HALF_PI 90
+#define SCALE_CONSTANT 1.64676
 
-const int ANGLE_LIMIT = 90;
+#define ELEM_SIZE 14
 
-const int HALFPI1 = 0x6487;
-const int LOOKUP1[PRECISION] = {0x3243, 0x1DAB, 0xFAD, 0x7F4, 0x3FE, 0x1FF, 0xFF, 
-								0x7F, 0x3F, 0x1F, 0xF, 0x7, 0x3, 0x1}; 
+typedef enum {ROTATIONAL, VECTORING} cordic_mode;
 
-const int HALFPI2 = 0xC90F;
-const int LOOKUP2[PRECISION] = {0x6487, 0x3B58, 0x1F5A, 0xFEA, 0x7FC, 0x3FF, 0x1FF,
-								0xFF, 0x7F, 0x3F, 0x1F, 0xF, 0x7, 0x3}; 
+/*
+ * The values represent arctan(2^-i) and then shifted left by 8 bits in an integer format
+ */
+const int elem_angle[] = {
+	2949120,
+	1740967,
+	919789,
+	466945,
 
-const float SCALE_FACTOR = 0.607252;
-
+	234379,
+	117304,
+	58666,
+	29335,
+	
+	14668,
+	7334,
+	3667,
+	1833,
+	
+	917,
+	458
+};
