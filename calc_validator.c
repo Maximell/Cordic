@@ -7,6 +7,8 @@
 // cordic implemted with fixed point arithmatic
 #include "cordic_implementations/cordic.c"
 
+// arm
+#include "cordic_implementations/cordic_assembly.h"
 
 
 void comparison(char* optimization, int x, int y, int opt_x, int opt_y) {
@@ -37,6 +39,20 @@ int main(void) {
 	printf("cos cordic: %15lf\n\n", cos_cordic(30));
 	printf("sin cordic: %15lf\n\n", sin_cordic(45));
 	//printf("arctan cordic: %15lf\n\n", arctan_cordic(2));
+
+	int x = 1;
+	int y = 0;
+	int z = 45;
+	cordic(&x, &y, &z, ROTATIONAL);
+	printf("normal cordic: %d, %d, %d\n", x, y, z);
+
+	x = 1;
+	y = 0;
+	z = 45;
+	cordic_assembly(&x, &y, &z, elem_angle);
+	printf("assembly cordic: %d, %d, %d\n", x, y, z);
+
+
 
 /*
 	int x_test = 500;

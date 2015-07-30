@@ -11,9 +11,9 @@
 	.file	"cordic_assembly.c"
 	.text
 	.align	2
-	.global	cordic_assembly_rotational
-	.type	cordic_assembly_rotational, %function
-cordic_assembly_rotational:
+	.global	cordic_assembly
+	.type	cordic_assembly, %function
+cordic_assembly:
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 32
 	@ frame_needed = 1, uses_anonymous_args = 0
@@ -86,6 +86,6 @@ cordic_assembly_rotational:
 	add	sp, fp, #0
 	ldmfd	sp!, {fp}
 	bx	lr
-	.size	cordic_assembly_rotational, .-cordic_assembly_rotational
+	.size	cordic_assembly, .-cordic_assembly
 	.ident	"GCC: (Sourcery G++ Lite 2008q3-72) 4.3.2"
 	.section	.note.GNU-stack,"",%progbits
