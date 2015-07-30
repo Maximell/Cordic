@@ -68,7 +68,7 @@ int main(void) {
 		z = angles[i];
 		cordic_optimized(&x, &y, &z, ROTATIONAL);
 	}
-	printf("\tcordic\ntime: %f\n\n", (double)(get_time() - before_time) / ticks_per_second);
+	printf("\toptimized cordic\ntime: %f\n\n", (double)(get_time() - before_time) / ticks_per_second);
 
 
 	// arm implementation
@@ -79,7 +79,7 @@ int main(void) {
 		z = angles[i];
 		cordic_assembly(&x, &y, &z, elem_angle);
 	}
-	printf("\tcordic\ntime: %f\n\n", (double)(get_time() - before_time) / ticks_per_second);
+	printf("\tarm cordic\ntime: %f\n\n", (double)(get_time() - before_time) / ticks_per_second);
 
 	return 0;
 }

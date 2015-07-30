@@ -93,7 +93,7 @@ extern inline void cordic_optimized(int* restrict x, int* restrict y, int* restr
 
 	for (int i = 0; i < PRECISION; i++) {
 		x_temp = x_local;
-		if (sign_decision(mode, *val)) {
+		if ((*val < 0 && mode == ROTATIONAL) || (*val >= 0 && mode != ROTATIONAL)) {
 			x_local = x_local + (y_local >> i);
 			y_local = y_local - (x_temp >> i);
 			z_local = z_local + local_elem_angle[i];
