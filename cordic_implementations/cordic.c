@@ -52,6 +52,62 @@ extern inline void cordic(int* x, int* y, int* z, cordic_mode mode) {
 	}
 }
 
+extern inline void cordic_optimized(int* restrict x, int* restrict y, int* restrict z, cordic_mode mode) {
+
+	int *val;
+	int x_temp;
+
+	const int local_elem_angle[] = {
+		2949120,
+		1740967,
+		919789,
+		466945,
+
+		234379,
+		117304,
+		58666,
+		29335,
+		
+		14668,
+		7334,
+		3667,
+		1833,
+		
+		917,
+		458	
+	};
+
+	int x_local = *x;
+	int y_local = *y;
+	int z_local = *z;
+
+	if (mode == ROTATIONAL) {
+		val = &z_local;
+	} else {
+		val = &y_local;
+	}
+
+	x_local = x_local << SHIFT;
+	y_local = y_local << SHIFT;
+	z_local = z_local << SHIFT;
+
+	for (int i = 0; i < PRECISION; i++) {
+		x_temp = x_local;
+		if (sign_decision(mode, *val)) {
+			x_local = x_local + (y_local >> i);
+			y_local = y_local - (x_temp >> i);
+			z_local = z_local + local_elem_angle[i];
+		} else {
+			x_local = x_local - (y_local >> i);
+			y_local = y_local + (x_temp >> i);
+			z_local = z_local - local_elem_angle[i];
+		}
+	}
+	*x = x_local;
+	*y = y_local;
+	*z = z_local;
+}
+
 extern inline double cos_cordic(int angle) {
 
 	int x = 1;

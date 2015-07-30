@@ -51,7 +51,11 @@ int main(void) {
 	cordic_assembly(&x, &y, &z, elem_angle);
 	printf("assembly cordic: %d, %d, %d\n", x, y, z);
 
-
+	x = 1;
+	y = 0;
+	z = 45;
+	cordic_optimized(&x, &y, &z, ROTATIONAL);
+	printf("optimized cordic: %d, %d, %d\n", x, y, z);
 
 /*
 	int x_test = 500;
