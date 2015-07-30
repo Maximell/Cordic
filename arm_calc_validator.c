@@ -52,9 +52,9 @@ int main(void) {
 	cordic_assembly(&x, &y, &z, (int)ROTATIONAL);
 	printf("assembly cordic: %d, %d, %d\n", x, y, z);
 
-	int x = 1;
-	int y = 0;
-	int z = 45;
+	x = 1;
+	y = 0;
+	z = 45;
 	cordic(&x, &y, &z, VECTORING);
 	printf("normal cordic: %d, %d, %d\n", x, y, z);
 
