@@ -10,6 +10,8 @@
 
 #include "cordic_implementations/cordic.c"
 
+#include "cordic_implementations/cordic_assembly.c"
+
 clock_t get_time() {
 	struct tms time_struct;
 	times(&time_struct);
@@ -55,6 +57,28 @@ int main(void) {
 		cordic(&x, &y, &z, ROTATIONAL);
 	}
 	printf("\tcordic\ntime: %f\n\n", (double)(get_time() - before_time) / ticks_per_second);
+
+	// int_cordic
+	before_time = get_time();
+	for (i=0; i<repetitions; i++) {
+		x = values[i];
+		y = angles[repetitions-1-i];
+		z = angles[i];
+		cordic_optimized(&x, &y, &z, ROTATIONAL);
+	}
+	printf("\toptimized cordic\ntime: %f\n\n", (double)(get_time() - before_time) / ticks_per_second);
+
+
+	// arm implementation
+	before_time = get_time();
+	for (i=0; i<repetitions; i++) {
+		x = values[i];
+		y = angles[repetitions-1-i];
+		z = angles[i];
+		cordic_assembly(&x, &y, &z, elem_angle);
+	}
+	printf("\tarm cordic\ntime: %f\n\n", (double)(get_time() - before_time) / ticks_per_second);
+
 
 	return 0;
 }
