@@ -45,10 +45,43 @@ cordic_assembly:
 	mov	r3, #0
 	str	r3, [fp, #-8]
 	b	.L2
-.L3:
+.L5:
 	ldr	r3, [fp, #-24]
 	ldr	r3, [r3, #0]
 	str	r3, [fp, #-12]
+	ldr	r3, [fp, #-16]
+	ldr	r3, [r3, #0]
+	cmp	r3, #0
+	bge	.L3
+	ldr	r3, [fp, #-24]
+	ldr	r1, [r3, #0]
+	ldr	r3, [fp, #-28]
+	ldr	r2, [r3, #0]
+	ldr	r3, [fp, #-8]
+	mov	r3, r2, asr r3
+	add	r2, r1, r3
+	ldr	r3, [fp, #-24]
+	str	r2, [r3, #0]
+	ldr	r3, [fp, #-28]
+	ldr	r1, [r3, #0]
+	ldr	r2, [fp, #-12]
+	ldr	r3, [fp, #-8]
+	mov	r3, r2, asr r3
+	rsb	r2, r3, r1
+	ldr	r3, [fp, #-28]
+	str	r2, [r3, #0]
+	ldr	r3, [fp, #-32]
+	ldr	r1, [r3, #0]
+	ldr	r3, [fp, #-8]
+	mov	r2, r3, asl #2
+	ldr	r3, [fp, #-36]
+	add	r3, r3, r2
+	ldr	r3, [r3, #0]
+	add	r2, r1, r3
+	ldr	r3, [fp, #-32]
+	str	r2, [r3, #0]
+	b	.L4
+.L3:
 	ldr	r3, [fp, #-24]
 	ldr	r1, [r3, #0]
 	ldr	r3, [fp, #-28]
@@ -76,13 +109,14 @@ cordic_assembly:
 	rsb	r2, r3, r1
 	ldr	r3, [fp, #-32]
 	str	r2, [r3, #0]
+.L4:
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #1
 	str	r3, [fp, #-8]
 .L2:
 	ldr	r3, [fp, #-8]
 	cmp	r3, #13
-	ble	.L3
+	ble	.L5
 	add	sp, fp, #0
 	ldmfd	sp!, {fp}
 	bx	lr
