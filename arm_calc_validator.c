@@ -9,6 +9,8 @@
 
 // arm
 #include "cordic_implementations/cordic_assembly.h"
+// optimized arm
+#include "cordic_implementations/cordic_assembly_optimized.h"
 
 
 void comparison(char* optimization, int x, int y, int opt_x, int opt_y) {
@@ -55,6 +57,12 @@ int main(void) {
 	x = 1;
 	y = 0;
 	z = 45;
+	cordic_assembly_optimized(&x, &y, &z, (int)ROTATIONAL);
+	printf("optimized assembly cordic: %d, %d, %d\n", x, y, z);
+
+	x = 1;
+	y = 0;
+	z = 45;
 	cordic(&x, &y, &z, VECTORING);
 	printf("normal cordic: %d, %d, %d\n", x, y, z);
 
@@ -63,6 +71,12 @@ int main(void) {
 	z = 45;
 	cordic_assembly(&x, &y, &z, (int)VECTORING);
 	printf("assembly cordic: %d, %d, %d\n", x, y, z);
+
+	x = 1;
+	y = 0;
+	z = 45;
+	cordic_assembly_optimized(&x, &y, &z, (int)VECTORING);
+	printf("optimized assembly cordic: %d, %d, %d\n", x, y, z);
 
 	return 0;
 }

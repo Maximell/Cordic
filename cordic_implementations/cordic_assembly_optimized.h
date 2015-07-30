@@ -1,0 +1,1 @@
+void cordic_assembly_optimized(int* x, int* y, int* z, int mode);

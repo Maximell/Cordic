@@ -13,6 +13,8 @@
 
 // arm
 #include "cordic_implementations/cordic_assembly.h"
+// optimized arm
+#include "cordic_implementations/cordic_assembly_optimized.h"
 
 clock_t get_time() {
 	struct tms time_struct;
@@ -80,6 +82,17 @@ int main(void) {
 		cordic_assembly(&x, &y, &z, (int)ROTATIONAL);
 	}
 	printf("\tarm cordic\ntime: %f\n\n", (double)(get_time() - before_time) / ticks_per_second);
+
+
+	// optimized arm implementation
+	before_time = get_time();
+	for (i=0; i<repetitions; i++) {
+		x = values[i];
+		y = angles[repetitions-1-i];
+		z = angles[i];
+		cordic_assembly_optimized(&x, &y, &z, (int)ROTATIONAL);
+	}
+	printf("\toptimized arm cordic\ntime: %f\n\n", (double)(get_time() - before_time) / ticks_per_second);
 
 	return 0;
 }
