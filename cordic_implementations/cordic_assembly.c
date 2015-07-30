@@ -11,7 +11,7 @@ extern inline void cordic_assembly(int *x, int *y, int *z, const int elem_angle[
 
 	for (int i = 0; i < 14; i++) {
 		x_temp = *x;
-		if (val < 0) {
+		if (*val < 0) {
 			*x = *x + (*y >> i);
 			*y = *y - (x_temp >> i);
 			*z = *z + elem_angle[i];
@@ -22,3 +22,13 @@ extern inline void cordic_assembly(int *x, int *y, int *z, const int elem_angle[
 		}
 	}
 }
+/*
+mul 5
+add 1
+shift 1
+div 15
+mem 5
+
+replace x,y,x with assembly inlining 
+
+*/

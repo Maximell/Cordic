@@ -7,9 +7,8 @@
 // cordic implemted with fixed point arithmatic
 #include "cordic_implementations/cordic.c"
 
-// arm
-#include "cordic_implementations/cordic_assembly.h"
-
+// arm implementation
+#include "cordic_implementations/cordic_assembly.c"
 
 void comparison(char* optimization, int x, int y, int opt_x, int opt_y) {
 	printf("\n");
