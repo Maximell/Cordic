@@ -52,33 +52,17 @@ int main(void) {
 	cordic_assembly(&x, &y, &z, (int)ROTATIONAL);
 	printf("assembly cordic: %d, %d, %d\n", x, y, z);
 
+	int x = 1;
+	int y = 0;
+	int z = 45;
+	cordic(&x, &y, &z, VECTORING);
+	printf("normal cordic: %d, %d, %d\n", x, y, z);
 
-
-/*
-	int x_test = 500;
-	int y_test = 200;
-	int z_test = 45;
-	int_cordic(&x_test, &y_test, &z_test, LOOKUP2);
-	printf("x: %d, y: %d\n\n", x_test, y_test);
-
-
-	int x_rand = rand() % 10000;
-	int y_rand = rand() % 10000;
-	int angle_rand = rand() % HALFPI2;
-
-	printf("x_rand: %d, y_rand: %d, angle_rand: %d\n", x_rand, y_rand, angle_rand);
-
-	int x_basic = x_rand;
-	int y_basic = y_rand;
-	int angle_basic = angle_rand;
-
-	// cordic implemented with integers - these values are assumed to be correct. 
-	int_cordic(&x_basic, &y_basic, &angle_basic, LOOKUP2);
-
-
-	// assembly optimizations
-
-*/
+	x = 1;
+	y = 0;
+	z = 45;
+	cordic_assembly(&x, &y, &z, (int)VECTORING);
+	printf("assembly cordic: %d, %d, %d\n", x, y, z);
 
 	return 0;
 }
