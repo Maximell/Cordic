@@ -49,7 +49,7 @@ int main(void) {
 	x = 1;
 	y = 0;
 	z = 45;
-	cordic_assembly(&x, &y, &z, elem_angle);
+	cordic_assembly(&x, &y, &z, (int)ROTATIONAL);
 	printf("assembly cordic: %d, %d, %d\n", x, y, z);
 
 
