@@ -38,7 +38,7 @@ int main(void) {
 	printf("cos cordic: %15lf\n\n", cos_cordic(30));
 	printf("sin cordic: %15lf\n\n", sin_cordic(45));
 	printf("arctan xy cordic: %15lf\n\n", arctan_x_y_cordic(3,4));
-	//printf("arctan cordic: %15lf\n\n", arctan_cordic(2));
+	printf("arctan cordic: %15lf\n\n", arctan_cordic(4));
 
 	int x = 1;
 	int y = 0;

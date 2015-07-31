@@ -33,3 +33,27 @@ CORDIC:
 CORDIC OPT:
 191
 
+Output:
+
+		Cordic Profiler: Seng 440
+
+	cordic
+
+time: 0.850000
+
+	optimized cordic
+
+time: 0.320000
+
+	arm cordic
+
+time: 0.330000
+
+	optimized arm cordic
+
+time: 0.330000
+
+
+
+
+

@@ -149,3 +149,14 @@ double arctan_x_y_cordic(int x, int y) {
 
 	return 90 - fixed_to_float(z_local);
 }
+
+double arctan_cordic(int xy) {
+
+	int x = 1;
+	int y = xy;
+	int z = 0;
+
+	cordic(&x, &y, &z, VECTORING);
+
+	return fixed_to_float(z);
+}
