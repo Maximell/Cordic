@@ -56,25 +56,7 @@ extern inline void cordic_optimized(int* restrict x, int* restrict y, int* restr
 
 	int *val;
 
-	const int local_elem_angle[] = {
-		2949120,
-		1740967,
-		919789,
-		466945,
-
-		234379,
-		117304,
-		58666,
-		29335,
-		
-		14668,
-		7334,
-		3667,
-		1833,
-		
-		917,
-		458	
-	};
+	const int local_elem_angle[] = { 2949120, 1740967, 919789, 466945, 234379, 117304, 58666, 29335, 14668, 7334, 3667, 1833, 917, 458 };
 
 	int x_local = *x;
 	int y_local = *y;
@@ -124,6 +106,15 @@ extern inline void cordic_optimized(int* restrict x, int* restrict y, int* restr
 	*x = x_local;
 	*y = y_local;
 	*z = z_local;
+}
+
+extern inline int inline_test(int x, int y) {
+
+	int z = x+y;
+
+	//__asm__("add\t%1, %2, %0" : "=r" (z) : "r" (x), "r" (y));
+
+	return z;
 }
 
 extern inline double cos_cordic(int angle) {

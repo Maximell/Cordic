@@ -22,5 +22,14 @@ shift 1
 div 15
 mem 5
 jump 1
+cmp 1
 
 +replace x,y,x with assembly inlining 
+
+CORDIC:
+35 + 14x(63)+1
+= 918
+
+CORDIC OPT:
+191
+

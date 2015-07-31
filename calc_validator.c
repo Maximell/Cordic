@@ -58,5 +58,7 @@ int main(void) {
 	cordic_optimized(&x, &y, &z, ROTATIONAL);
 	printf("optimized cordic: %d, %d, %d\n", x, y, z);
 
+	printf("Inline computation Test, should be 5: %d\n", inline_test(1, 4));
+
 	return 0;
 }
